@@ -1,0 +1,345 @@
+<div ng-controller="JobDetailController">
+    <!--<div class="page-header">-->
+        <!--<h1>-->
+            <!--Overall-->
+            <!--<small>-->
+                <!--<i class="ace-icon fa fa-angle-double-right"></i>-->
+                <!--如遇到问题，可以通过下面的方式联系我们。-->
+            <!--</small>-->
+        <!--</h1>-->
+    <!--</div>-->
+    <div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="javascript: void(0)" aria-expanded="true" data-target="#basic">
+                    <i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+                    CPU
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="javascript: void(0)" aria-expanded="false" data-target="#script"
+                   ng-click="showPeriod(rankList)">
+                    <i class="purple ace-icon fa fa-code-fork bigger-125"></i>
+                    Memory
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="javascript: void(0)" aria-expanded="false" data-target="#script"
+                   ng-click="showPeriod(rankList)">
+                    <i class="purple ace-icon fa fa-code-fork bigger-125"></i>
+                    Swap
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="javascript: void(0)" aria-expanded="false" data-target="#script"
+                   ng-click="showPeriod(rankList)">
+                    <i class="purple ace-icon fa fa-code-fork bigger-125"></i>
+                    Net
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="javascript: void(0)" aria-expanded="false" data-target="#script"
+                   ng-click="showPeriod(rankList)">
+                    <i class="purple ace-icon fa fa-code-fork bigger-125"></i>
+                    NetInterface
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="javascript: void(0)" aria-expanded="false" data-target="#script"
+                   ng-click="showPeriod(rankList)">
+                    <i class="purple ace-icon fa fa-code-fork bigger-125"></i>
+                    FileSystem
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="basic" class="tab-pane fade in active">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 widget-container-col">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-small">
+                            <h6 class="widget-title smaller">CPU</h6>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="alert alert-info">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 widget-container-col">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-small">
+                            <h6 class="widget-title smaller">FileSystem</h6>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="alert alert-info">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 widget-container-col">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-small">
+                            <h6 class="widget-title smaller">Memory</h6>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="alert alert-info">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 widget-container-col">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-small">
+                            <h6 class="widget-title smaller">Swap</h6>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="alert alert-info">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 widget-container-col">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-small">
+                            <h6 class="widget-title smaller">Net</h6>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="alert alert-info">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 widget-container-col">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-small">
+                            <h6 class="widget-title smaller">NetInterface</h6>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                                <div class="alert alert-info">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="script" class="tab-pane fade in">
+            <div class="widget-box transparent">
+                <div class="widget-main">
+                    <div class="profile-feed row">
+                        <div class="col-sm-12">
+                            <div class="profile-activity clearfix">
+                                <div >
+                                    <i class="pull-left thumbicon fa fa-tasks btn-info no-hover"></i>
+                                    <span class="user"> 任务创建策略 </span>(生成具体任务时执行，主要是在后台服务端使用)
+                                    <div class="time" ui-tree>
+                                        <div class="scripts" ui-tree-nodes ng-model="jobBuilders">
+                                            <span ui-tree-node class="script" ng-repeat="builder in jobBuilders">
+                                                <span ui-tree-handle >
+                                                    {{builder.scriptName}}
+                                                </span>
+                                                <button type="button" class="close" data-toggle="modal"
+                                                        data-target="#modal-job-script" ng-click="selectScript(builder)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tools action-buttons">
+                                    <a href="javascript:void(0);" class="blue" data-toggle="modal"
+                                       data-target="#modal-job-define-script" ng-click="selectDefineScript(1)">
+                                        <i class="ace-icon fa fa-life-ring bigger-125"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" class="blue" data-toggle="modal"
+                                       data-target="#modal-job-script" ng-click="selectScriptType(1)">
+                                        <i class="ace-icon fa fa-file-code-o bigger-125"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" class="blue" data-toggle="modal"
+                                       data-target="#modal-form" ng-click="showRule(rule)">
+                                        <i class="ace-icon fa fa-save bigger-125"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="profile-activity clearfix">
+                                <div >
+                                    <i class="pull-left thumbicon fa fa-bug btn-success no-hover"></i>
+                                    <span class="user"> 爬取策略 </span>(客户端爬取时执行,可以定义访问/解析/过滤/结果等Command)
+                                    <div class="time" ui-tree>
+                                        <div class="scripts" ui-tree-nodes ng-model="jobChains">
+                                            <span ui-tree-node class="script" ng-repeat="chain in jobChains">
+                                                <span ui-tree-handle >
+                                                    {{chain.scriptName}}
+                                                </span>
+                                                <button type="button" class="close" data-toggle="modal"
+                                                        data-target="#modal-job-script" ng-click="selectScript(chain)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tools action-buttons">
+                                    <a href="javascript:void(0);" class="blue" data-toggle="modal"
+                                       data-target="#modal-job-define-script" ng-click="selectDefineScript(2)">
+                                        <i class="ace-icon fa fa-life-ring bigger-125"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" class="blue" data-toggle="modal"
+                                       data-target="#modal-job-script" ng-click="selectScriptType(2)">
+                                        <i class="ace-icon fa fa-file-code-o bigger-125"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" class="blue" data-toggle="modal"
+                                       data-target="#modal-form" ng-click="saveScriptOrder()">
+                                        <i class="ace-icon fa fa-save bigger-125"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-job-script" class="modal fade" tabindex="-1" data-backdrop="static" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" style="width:1000px;">
+            <div class="modal-content">
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        脚本配置
+                    </div>
+                </div>
+
+                <div class="modal-body no-padding">
+                    <form class="form-horizontal" role="form" style="padding: 5px">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 名称 </label>
+
+                            <div class="col-sm-11">
+                                <input type="text" ng-model="jobScript.scriptName" placeholder="名称" ng-disabled="jobScript.scriptId>0 "
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="jobScript.scriptId<=0 || jobScript.scriptId==null">
+                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 内容 </label>
+
+                            <div class="col-sm-11">
+                                <div ui-ace="aceOption" ng-model="jobScript.script" editor="script12"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="jobScript.scriptId>99">
+                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 预定脚本 </label>
+
+                            <div class="col-sm-11">
+                                <select ng-model="jobScript.scriptId" ng-change="showModalExample()" name="required1" validator="required" class="col-sm-10"
+                                        required-error-message="类别不能为空!">
+                                    <option value="{{ds.id}}" ng-repeat="ds in defineScripts">{{ds.scriptName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="jobScript.scriptId>0">
+                            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 参数 </label>
+
+                            <div class="col-sm-11">
+                                <div ui-ace="aceOption" ng-model="jobScript.scriptParam" editor="scriptParam"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-mini" ng-click="saveJobScript()">
+                            <i class="fa fa-save"></i>
+                            确定
+                        </button>
+                        <button class="btn btn-danger btn-mini" data-dismiss="modal" ng-click="deleteJobScript()">
+                            <i class="fa fa-remove"></i>
+                            删除
+                        </button>
+                        <button class="btn btn-grey btn-mini" data-dismiss="modal" ng-click="renderScript()">
+                            <i class="fa fa-remove"></i>
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div id="modal-job-define-script" class="modal fade" tabindex="-1" data-backdrop="static" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" style="width:700px;">
+            <div class="modal-content">
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        预定脚本配置
+                    </div>
+                </div>
+
+                <div class="modal-body no-padding">
+                    <form class="form-horizontal" role="form" style="padding: 5px">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 预定脚本 </label>
+
+                            <div class="col-sm-10">
+                                <select ng-model="jobScript.scriptId" ng-change="showModalExample()" class="col-sm-10">
+                                    <option value="{{ds.id}}" ng-repeat="ds in defineScripts">{{ds.scriptName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 参数 </label>
+
+                            <div class="col-sm-10">
+                                <div ui-ace="aceOption" ng-model="jobScript.scriptParam" editor="scriptParam2"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-mini" ng-click="saveJobScript()">
+                            <i class="fa fa-save"></i>
+                            确定
+                        </button>
+                        <button class="btn btn-danger btn-mini" data-dismiss="modal" ng-click="deleteJobScript()">
+                            <i class="fa fa-remove"></i>
+                            删除
+                        </button>
+                        <button class="btn btn-grey btn-mini" data-dismiss="modal" ng-click="renderScript()">
+                            <i class="fa fa-remove"></i>
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>

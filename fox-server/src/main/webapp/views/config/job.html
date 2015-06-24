@@ -1,0 +1,207 @@
+<div ng-controller="JobController">
+    <div class="page-header">
+        <h1>
+            任务管理
+            <div class="col-xs-12 col-sm-10 pull-right">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">
+                        名称
+                    </span>
+                    <input type="text" ng-model="condition.name" class="form-control">
+                    <span class="input-group-addon">
+                        DTS
+                    </span>
+                    <input type="text" ng-model="condition.dtsJobId" class="form-control">
+                     <span class="input-group-addon">
+                        类别
+                    </span>
+                    <select ng-model="condition.category" convert-to-number class="chosen-select form-control" ng-options="k as v for (k,v) in category" >
+                        <option value="">ALL</option>
+                    </select>
+                    <span class="input-group-addon">
+                        源
+                    </span>
+                    <select name="targetId" ng-model="_target" class="chosen-select form-control"
+                            ng-change="condition.targetId=(_target.id!=null &&_target.id!=undefined?_target.id:0)"
+                            ng-options="target.name for target in targets track by target.id" >
+                        <option value="">ALL</option>
+                    </select>
+                    <span class="input-group-btn input-group-btn-sm btn-group">
+                        <div>
+                        <button type="button" class="btn btn-purple btn-xs" ng-click="search()">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-form" ng-click="newJob()">
+                            <i class="fa fa-plus"></i>
+                            New
+                        </button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </h1>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th style="width: 50px">ID</th>
+            <th>源</th>
+            <th style="width: 70px;text-align: center">类别</th>
+            <th>名称</th>
+            <th>DTS ID</th>
+            <th>Timer</th>
+            <th style="width: 50px;text-align: center">状态</th>
+            <th style="text-align: center;width: 175px;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="job in jobs">
+            <td>
+                {{job.id}}
+            </td>
+            <td>
+                {{job.targetName}}
+            </td>
+            <td>
+                {{getCategory(job.category)}}
+            </td>
+            <td>
+                {{job.name}}
+            </td>
+            <td>
+                {{job.dtsJobId}}
+            </td>
+            <td>
+                {{job.timer}}
+            </td>
+            <td>
+                {{getStatus(job.status)}}
+            </td>
+            <td style="text-align: center">
+                <div class="hidden-sm hidden-xs action-buttons">
+                    <button class="btn btn-success btn-minier" ng-click="showJob(job)">
+                        <i class="fa fa-pencil"></i>
+                        修改
+                    </button>
+                    <button class="btn btn-purple btn-minier" ng-click="updateStatus(job,1)" ng-show="job.status==0">
+                        <i class="fa fa-cloud-upload"></i>
+                        生效
+                    </button>
+                    <button class="btn btn-grey btn-minier" ng-click="updateStatus(job,0)" ng-show="job.status==1">
+                        <i class="fa fa-cloud-download"></i>
+                        失效
+                    </button>
+                    <button class="btn btn-danger btn-minier" ng-click="deleteJob(job)">
+                        <i class="fa fa-remove"></i>
+                        删除
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="modal-form" class="modal fade" tabindex="-1" data-backdrop="static" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        任务配置
+                    </div>
+                </div>
+
+                <div class="modal-body no-padding">
+                    <form class="form-horizontal" name="jobForm" role="form" style="padding: 5px">
+                        <div class="form-group ">
+                            <label class="col-sm-2 control-label no-padding-right"> 源 </label>
+                            <div class="col-sm-9">
+                                <select name="targetId" ng-model="_target" style="width: 100%"  validator="required" required-error-message="源不能为空!"
+                                        ng-change="currentJob.targetId=_target.id"
+                                        ng-options="target.name for target in targets track by target.id" >
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-sm-2 control-label no-padding-right"> 类别 </label>
+                            <div class="col-sm-9">
+                                <select name="required1" ng-model="currentJob.category" validator="required" style="width:100%;"
+                                        required-error-message="类别不能为空!">
+                                    <option value="{{key}}" ng-repeat="(key,value) in category">{{value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 名称 </label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="required2" ng-model="currentJob.name" id="form-field-1"
+                                       placeholder="任务名称" class="form-control input-sm" validator="required"
+                                       required-error-message="名称不能为空!">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right"> 种子 </label>
+
+                            <div class="col-sm-9">
+                                <textarea id="form-field-2" name="required3"
+                                          placeholder="请输入对应种子URL,多个URL用;分隔"
+                                          class="autosize-transition form-control ng-pristine ng-untouched ng-valid" ng-model="currentJob.seeds"
+                                          style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 80px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right">Timer </label>
+
+                            <div class="col-sm-9">
+                                <input type="text"  ng-model="currentJob.timer"
+                                       placeholder="定时任务Timer(需要符合crontab格式)" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-2 control-label no-padding-right"> 重试次数 </label>-->
+
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" name="number" ng-model="currentJob.retryCount"-->
+                                       <!--placeholder="重试次数(默认为0)" class="form-control input-sm" validator="number"-->
+                                       <!--number-error-message="重试次数只能是数字!">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right"> 间隔(ms) </label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="number2" ng-model="currentJob.sleep"
+                                       placeholder="每次爬取目标地址的间隔时间(默认为0)" class="form-control input-sm"
+                                       validator="number" number-error-message="间隔时间只能是数字!">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right"> 线程数 </label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="number4" ng-model="currentJob.threadNum" placeholder="抓取线程数" class="form-control input-sm"
+                                       validator="number,min=0" number-error-message="线程数只能是数字!" min-error-message="线程数必须大于0!">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="modal-footer">
+                        <button validation-submit="jobForm" class="btn btn-success btn-mini" ng-click="saveJob()">
+                            <i class="fa fa-save"></i>
+                            确定
+                        </button>
+                        <button class="btn btn-grey btn-mini" data-dismiss="modal" ng-click="renderJob();">
+                            <i class="fa fa-remove"></i>
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>

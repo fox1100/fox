@@ -1,0 +1,93 @@
+<span ng-controller="ClientSysErrorController">
+    <div class="page-header">
+        <h1>
+            客户系统异常
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                以天为单位，记录每天系统出错情况。
+            </small>
+            <div class="col-xs-12 col-sm-3 pull-right">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar bigger-110"></i>
+                    </span>
+                    <input class="form-control date-picker" ng-model="date" id="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd">
+                     <span class="input-group-btn input-group-btn-sm btn-group">
+                        <div>
+                        <button type="button" class="btn btn-purple btn-xs" ng-click="search()">
+                            <span class=" fa fa-search "></span>
+                            Search
+                        </button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </h1>
+    </div>
+    <div class="col-sm-6">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>描述</th>
+                <th>日期</th>
+                <th>次数</th>
+                <th>占比</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="exception in exceptions">
+                <td style="width: 260px;word-break: break-all" ng-click="showException(exception)" data-toggle="modal" data-target="#modal-form">
+                    {{exception.errorMsg}}
+                </td>
+                <td>
+                    {{exception.time}}
+                </td>
+                <td>
+                <span class="label label-lg label-danger" ng-click="renderClient(exception.errorMsg)">
+                    {{exception.count}}
+                </span>
+                </td>
+                <td>
+                <span class="label label-lg label-danger">
+                    {{calRate(exception.count,total)}}%
+                </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <div id="chart"></div>
+    </div>
+
+    <div id="modal-form" class="modal fade" tabindex="-1" data-backdrop="static" style="display: none;">
+        <div class="modal-dialog" style="width: 700px">
+            <div class="modal-content">
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span class="white">×</span>
+                        </button>
+                        异常详细信息
+                    </div>
+                </div>
+
+                <div class="modal-body no-padding">
+                    <pre>{{exceptionDetail}}</pre>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</span>
+<script>
+    jQuery(function($) {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).prev().on(ace.click_event, function(){
+            $(this).next().focus();
+        });
+    });
+</script>

@@ -1,0 +1,98 @@
+<div ng-controller="TargetController">
+    <div class="page-header">
+        <h1>
+            源配置
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                需要爬取的目标源配置/管理
+            </small>
+            <div class="btn-group btn-group-mini pull-right">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modal-form" ng-click="newTarget()" >
+                    <i class="fa fa-plus"></i>
+                    新建
+                </button>
+            </div>
+        </h1>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th style="text-align: center;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="target in targets">
+            <td>
+                {{target.id}}
+            </td>
+            <td>
+                {{target.name}}
+            </td>
+            <td>
+                {{target.createTime|date:'yyyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td>
+                {{target.updateTime|date:'yyyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td style="text-align: center">
+                <div class="hidden-sm hidden-xs action-buttons">
+                    <button class="btn btn-success btn-minier" ng-click="showTarget(target)" data-toggle="modal" data-target="#modal-form">
+                        <i class="fa fa-pencil"></i>
+                        修改
+                    </button>
+                    <button class="btn btn-purple btn-minier" ng-click="showJob(target)">
+                        <i class="fa fa-bug"></i>
+                        任务
+                    </button>
+                    <button class="btn btn-danger btn-minier" ng-click="deleteTarget(target)">
+                        <i class="fa fa-remove"></i>
+                        删除
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="modal-form" class="modal fade" tabindex="-1" data-backdrop="static" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        爬取源配置
+                    </div>
+                </div>
+
+                <div class="modal-body no-padding">
+                    <form name="targetForm" class="form-horizontal" role="form" style="padding-top: 13px;">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 名称 </label>
+
+                            <div class="col-sm-9">
+                                <input type="text" name="required" ng-model="currentTarget.name" id="form-field-1" placeholder="爬取源名称" class="form-control input-sm"  validator="required" required-error-message="名称不能为空!">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="modal-footer">
+                        <button validation-submit="targetForm" class="btn btn-success btn-mini" ng-click="saveTarget()" ng-disabled="saveBtnDisable">
+                            <i class="fa fa-save"></i>
+                            确定
+                        </button>
+                        <button class="btn btn-grey btn-mini" data-dismiss="modal" ng-click="render()">
+                            <i class="fa fa-remove"></i>
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>

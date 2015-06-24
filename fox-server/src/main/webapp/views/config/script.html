@@ -1,0 +1,172 @@
+<div ng-controller="ScriptController">
+    <div class="page-header">
+        <h1>
+            预定义脚本
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                对于一些通用的爬取脚本可以定义成预定义脚本.
+            </small>
+            <div class="btn-group btn-group-mini pull-right">
+                <button class="btn btn-success" data-toggle="modal" data-target="#script-form" ng-click="newScript()">
+                    <i class="fa fa-plus"></i>
+                    新建
+                </button>
+            </div>
+        </h1>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>类型</th>
+            <th>参数类型</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th style="text-align: left;width: 200px;">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="script in scripts">
+            <td>
+                {{script.id}}
+            </td>
+            <td>
+                {{script.scriptName}}
+            </td>
+            <td>
+                {{getType(script.type)}}
+            </td>
+            <td>
+                {{getParamType(script.paramType)}}
+            </td>
+            <td>
+                {{script.createTime|date:'yyyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td>
+                {{script.updateTime|date:'yyyy-MM-dd HH:mm:ss'}}
+            </td>
+            <td style="text-align: left">
+                <div class="hidden-sm hidden-xs action-buttons">
+                    <button class="btn btn-success btn-minier" ng-click="showScript(script)" data-toggle="modal" data-target="#script-form">
+                        <i class="fa fa-pencil"></i>
+                        修改
+                    </button>
+                    <button class="btn btn-purple btn-minier" data-toggle="modal" ng-click="showExample(script)" data-target="#modal-form">
+                        <i class="fa fa-th-large"></i>
+                        配置例子
+                    </button>
+                    <button class="btn btn-danger btn-minier" ng-click="deleteScript(script)">
+                        <i class="fa fa-remove"></i>
+                        删除
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="script-form" class="modal fade" tabindex="-1" data-backdrop="static" style="display: none;">
+        <div class="modal-dialog" style="width:1000px;">
+            <div class="modal-content">
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        预定义脚本
+                    </div>
+                </div>
+
+                <div class="modal-body no-padding">
+                    <form class="form-horizontal" role="form" style="padding: 5px">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label no-padding-right" > 名称 </label>
+
+                            <div class="col-sm-11">
+                                <input type="text" ng-model="script.scriptName" placeholder="脚本名称(必须和Groovy类名一致)"
+                                       class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label no-padding-right" > 类型 </label>
+
+                            <div class="col-sm-11">
+                                <select ng-model="script.type" name="required1" validator="required"
+                                        required-error-message="类别不能为空!" class="col-sm-5">
+                                    <option value="{{key}}" ng-repeat="(key,value) in type">{{value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label no-padding-right" > 参数类型 </label>
+
+                            <div class="col-sm-11">
+                                <select ng-model="script.paramType" name="required1" validator="required"
+                                        required-error-message="类别不能为空!" class="col-sm-5">
+                                    <option value="{{key}}" ng-repeat="(key,value) in paramType">{{value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label no-padding-right"> 脚本内容 </label>
+
+                            <div class="col-sm-11">
+                                <div ui-ace="aceOption" ng-model="script.script"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-mini" ng-click="saveScript()">
+                            <i class="fa fa-save"></i>
+                            确定
+                        </button>
+                        <button class="btn btn-grey btn-mini" data-dismiss="modal" ng-click="render()">
+                            <i class="fa fa-remove"></i>
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div id="modal-form" class="modal fade" tabindex="-1" data-backdrop="static" style="display: none;">
+        <div class="modal-dialog" style="width:1000px;">
+            <div class="modal-content">
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        配置例子
+                    </div>
+                </div>
+
+                <div class="modal-body no-padding">
+                    <form class="form-horizontal" role="form" style="padding: 5px">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label no-padding-right"> 配置说明例子 </label>
+
+                            <div class="col-sm-11">
+                                <div ui-ace="aceOption" ng-model="example" editor="model"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer no-margin-top">
+                    <div class="modal-footer">
+                        <button class="btn btn-success btn-mini" ng-click="saveExample()">
+                            <i class="fa fa-save"></i>
+                            确定
+                        </button>
+                        <button class="btn btn-grey btn-mini" data-dismiss="modal">
+                            <i class="fa fa-remove"></i>
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>

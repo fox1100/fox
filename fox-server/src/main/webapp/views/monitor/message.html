@@ -1,0 +1,119 @@
+<span ng-controller="MessageStatsController">
+    <div class="page-header">
+        <h1>
+            消息监控
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                以天为单位，记录任务及topic相关的消息情况。
+            </small>
+            <div class="col-xs-12 col-sm-4 pull-right">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar bigger-110"></i>
+                    </span>
+                    <input class="form-control date-picker" ng-model="date" id="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success btn-sm" ng-click="renderJob()">
+                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                            任务
+                        </button>
+                        <button type="button" class="btn btn-info2 btn-sm" ng-click="renderTopic()">
+                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                            Topic
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </h1>
+    </div>
+    <table class="table table-striped table-bordered table-hover" ng-show="!topic">
+        <thead>
+        <tr>
+            <th>任务名称</th>
+            <th>个数</th>
+            <th>大小</th>
+            <th>失败数</th>
+            <th>空数据</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="messageStats in jobStatsList">
+            <td>
+                {{messageStats.jobName}}
+            </td>
+            <td>
+                {{messageStats.count}}
+            </td>
+            <td>
+                {{messageStats.size}}
+            </td>
+            <td>
+                {{messageStats.failureCount}}
+            </td>
+            <td>
+                {{messageStats.noDataCount}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-bordered table-hover" ng-show="topic">
+        <thead>
+        <tr>
+            <th>Topic名称</th>
+            <th>个数</th>
+            <th>大小</th>
+            <th>失败数</th>
+            <th>空数据</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="messageStats in topicStatsList">
+            <td>
+                {{messageStats.topicName}}
+            </td>
+            <td>
+                {{messageStats.count}}
+            </td>
+            <td>
+                {{messageStats.size}}
+            </td>
+            <td>
+                {{messageStats.failureCount}}
+            </td>
+            <td>
+                {{messageStats.noDataCount}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</span>
+<div id="modal-form" class="modal fade" tabindex="-1" data-backdrop="static" style="display: none;">
+    <div class="modal-dialog" style="width: 700px">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">×</span>
+                    </button>
+                    异常分布
+                </div>
+            </div>
+
+            <div class="modal-body no-padding">
+                <div id="chart"></div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script>
+    jQuery(function($) {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).prev().on(ace.click_event, function(){
+            $(this).next().focus();
+        });
+    });
+</script>
