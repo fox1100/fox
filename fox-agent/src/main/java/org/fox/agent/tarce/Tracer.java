@@ -9,10 +9,21 @@ import org.fox.common.message.trace.Span;
  *         Time: 13:52
  */
 public class Tracer {
+    public static void startTrace(String traceId, long parentSpanId, String type, String name) {
+        Span span = new Span(type, name);
+        span.setTraceId(traceId);
+        span.setParentSpanId(parentSpanId);
+        startTrace(span);
+    }
+
     public static void startTrace(String type, String name) {
         //TODO if type or name is null?
-        CallStack callStack = TraceContext.getCallStack();
         Span span = new Span(type, name);
+        startTrace(span);
+    }
+
+    private static void startTrace(Span span) {
+        CallStack callStack = TraceContext.getCallStack();
         span.setStartTime(System.currentTimeMillis());
         callStack.startSpan(span);
     }

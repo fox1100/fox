@@ -1,6 +1,7 @@
 package org.fox.common.message.trace;
 
 import org.fox.common.util.HostUtil;
+import org.fox.common.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,9 @@ public class CallStack {
 
     public void startSpan(Span span) {
         if (currentSpan == null) {
-            span.setTraceId(TraceIdGenerator.nextTraceId(applicationId, span.getStartTime()));
+            if (StringUtil.isEmpty(span.getTraceId())) {
+                span.setTraceId(TraceIdGenerator.nextTraceId(applicationId, span.getStartTime()));
+            }
             span.setId(SpanIdGenerator.nextSpanId(0l));
         } else {
             span.setTraceId(currentSpan.getTraceId());
