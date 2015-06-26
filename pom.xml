@@ -20,6 +20,8 @@
         <netty-all.version>4.0.27.Final</netty-all.version>
         <kryo.version>3.0.1</kryo.version>
         <servlet-api.version>2.5</servlet-api.version>
+
+        <junit.version>4.11</junit.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -58,6 +60,13 @@
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

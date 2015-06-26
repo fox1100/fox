@@ -1,6 +1,6 @@
 package org.fox.agent.monitor.os;
 
-import org.fox.common.message.NetStats;
+import org.fox.common.message.monitor.os.NetStats;
 import org.hyperic.sigar.NetStat;
 import org.hyperic.sigar.Sigar;
 

@@ -2,7 +2,7 @@ package org.fox.agent.monitor;
 
 import org.fox.agent.message.io.TcpSocketSender;
 import org.fox.agent.monitor.os.OSStatsCollector;
-import org.fox.common.message.OSStats;
+import org.fox.common.message.monitor.os.OSStats;
 import org.fox.common.util.ThreadUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

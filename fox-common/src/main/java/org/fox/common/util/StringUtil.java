@@ -43,4 +43,18 @@ public class StringUtil {
         }
     }
 
+    public static String fixLength(long value, int length, String fixValue) {
+        return fixLength(String.valueOf(value), length, fixValue);
+    }
+
+    public static String fixLength(int value, int length, String fixValue) {
+        return fixLength(String.valueOf(value), length, fixValue);
+    }
+
+    public static String fixLength(String value, int length, String fixValue) {
+        while (value.length() < length) {
+            value = fixValue + value;
+        }
+        return value;
+    }
 }

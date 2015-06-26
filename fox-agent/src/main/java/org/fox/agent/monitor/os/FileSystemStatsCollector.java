@@ -1,6 +1,6 @@
 package org.fox.agent.monitor.os;
 
-import org.fox.common.message.FileSystemStats;
+import org.fox.common.message.monitor.os.FileSystemStats;
 import org.hyperic.sigar.FileSystemUsage;
 import org.hyperic.sigar.Sigar;
 

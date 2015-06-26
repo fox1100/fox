@@ -1,7 +1,7 @@
 package org.fox.server.analyzer.os;
 
 import org.fox.common.message.Message;
-import org.fox.common.message.OSStats;
+import org.fox.common.message.monitor.os.OSStats;
 import org.fox.server.analyzer.Analyzer;
 
 /**

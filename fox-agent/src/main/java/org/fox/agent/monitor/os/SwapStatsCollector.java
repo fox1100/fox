@@ -1,6 +1,6 @@
 package org.fox.agent.monitor.os;
 
-import org.fox.common.message.SwapStats;
+import org.fox.common.message.monitor.os.SwapStats;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.Swap;
 

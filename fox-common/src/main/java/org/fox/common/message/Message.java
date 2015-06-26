@@ -10,11 +10,20 @@ import org.fox.common.util.KryoUtil;
  *         Time: 12:58
  */
 public abstract class Message {
+    private long id;
     private long logTime;
     private long queueTime;
     private long sendTime;
     private long receiveTime;
     private long processTime;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getLogTime() {
         return logTime;

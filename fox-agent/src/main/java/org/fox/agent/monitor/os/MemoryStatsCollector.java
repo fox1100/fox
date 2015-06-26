@@ -1,6 +1,6 @@
 package org.fox.agent.monitor.os;
 
-import org.fox.common.message.MemoryStats;
+import org.fox.common.message.monitor.os.MemoryStats;
 import org.hyperic.sigar.Mem;
 import org.hyperic.sigar.Sigar;
 

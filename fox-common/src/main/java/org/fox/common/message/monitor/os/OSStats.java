@@ -1,4 +1,6 @@
-package org.fox.common.message;
+package org.fox.common.message.monitor.os;
+
+import org.fox.common.message.Message;
 
 import java.util.List;
 

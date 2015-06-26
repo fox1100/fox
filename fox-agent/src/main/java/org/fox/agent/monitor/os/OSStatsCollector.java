@@ -1,8 +1,8 @@
 package org.fox.agent.monitor.os;
 
-import org.fox.common.message.FileSystemStats;
-import org.fox.common.message.NetInterfaceStats;
-import org.fox.common.message.OSStats;
+import org.fox.common.message.monitor.os.FileSystemStats;
+import org.fox.common.message.monitor.os.NetInterfaceStats;
+import org.fox.common.message.monitor.os.OSStats;
 import org.hyperic.sigar.FileSystem;
 import org.hyperic.sigar.NetRoute;
 import org.hyperic.sigar.Sigar;
