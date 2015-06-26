@@ -15,6 +15,7 @@ public class TracerTest {
         Assert.assertEquals("method", span.getType());
         Assert.assertEquals("test-1", span.getName());
         Assert.assertTrue(span.getParentSpanId() == 0l);
+        Assert.assertTrue(span.getDepth()==0);
     }
 
     @Test
@@ -35,6 +36,7 @@ public class TracerTest {
         Assert.assertTrue(rootSpan.getParentSpanId() == 0l);
         Assert.assertTrue(rootSpan.getDurationTime() >= 7);
         Assert.assertTrue(rootSpan.getDurationTime()-rootSpan.getSelfTime() >= 7);
+        Assert.assertTrue(rootSpan.getDepth()==0);
 
         List<Span> parentSpanList = rootSpan.getChildren();
         Assert.assertTrue(parentSpanList.size() == 1);
@@ -44,6 +46,7 @@ public class TracerTest {
         Assert.assertTrue(parentSpan.getParentSpanId() == rootSpan.getId());
         Assert.assertTrue(parentSpan.getDurationTime() >= 7);
         Assert.assertTrue(parentSpan.getDurationTime()-parentSpan.getSelfTime() >= 7);
+        Assert.assertTrue(parentSpan.getDepth()==1);
 
         List<Span> childrenSpanList = parentSpan.getChildren();
         Assert.assertTrue(childrenSpanList.size() == 2);
@@ -53,12 +56,14 @@ public class TracerTest {
         Assert.assertTrue(childrenSpan1.getParentSpanId() == parentSpan.getId());
         Assert.assertTrue(childrenSpan1.getDurationTime() >= 3);
         Assert.assertTrue(childrenSpan1.getSelfTime() >= 3);
+        Assert.assertTrue(childrenSpan1.getDepth()==2);
         Span childrenSpan2 = childrenSpanList.get(1);
         Assert.assertEquals("method", childrenSpan2.getType());
         Assert.assertEquals("test-4", childrenSpan2.getName());
         Assert.assertTrue(childrenSpan2.getParentSpanId() == parentSpan.getId());
         Assert.assertTrue(childrenSpan2.getDurationTime() >= 4);
         Assert.assertTrue(childrenSpan2.getSelfTime() >= 4);
+        Assert.assertTrue(childrenSpan2.getDepth()==2);
     }
 
     @Test
