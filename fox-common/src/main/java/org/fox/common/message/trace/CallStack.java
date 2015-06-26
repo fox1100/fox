@@ -1,6 +1,8 @@
 package org.fox.common.message.trace;
 
 import org.fox.common.util.HostUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Stack;
 
@@ -10,6 +12,7 @@ import java.util.Stack;
  *         Time: 12:46
  */
 public class CallStack {
+    private final static Logger LOGGER = LoggerFactory.getLogger(CallStack.class);
     private int applicationId;
     private String applicationName;
     private String hostName;
@@ -42,6 +45,7 @@ public class CallStack {
             span.setTraceId(currentSpan.getTraceId());
             span.setId(SpanIdGenerator.nextSpanId(span.getParentSpanId()));
             span.setParentSpanId(currentSpan.getId());
+            span.setDepth(currentSpan.getDepth() + 1);
             //set parent span's child span id
             currentSpan.setChildSpanId(span.getId());//TODO too many children span id?
             currentSpan.addChild(span);

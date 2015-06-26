@@ -34,7 +34,7 @@ public class TracerTest {
         Assert.assertEquals("test-1", rootSpan.getName());
         Assert.assertTrue(rootSpan.getParentSpanId() == 0l);
         Assert.assertTrue(rootSpan.getDurationTime() >= 7);
-        Assert.assertTrue(rootSpan.getSelfTime() <= 7);
+        Assert.assertTrue(rootSpan.getDurationTime()-rootSpan.getSelfTime() >= 7);
 
         List<Span> parentSpanList = rootSpan.getChildren();
         Assert.assertTrue(parentSpanList.size() == 1);
@@ -43,7 +43,7 @@ public class TracerTest {
         Assert.assertEquals("test-2", parentSpan.getName());
         Assert.assertTrue(parentSpan.getParentSpanId() == rootSpan.getId());
         Assert.assertTrue(parentSpan.getDurationTime() >= 7);
-        Assert.assertTrue(parentSpan.getSelfTime() <= 7);
+        Assert.assertTrue(parentSpan.getDurationTime()-parentSpan.getSelfTime() >= 7);
 
         List<Span> childrenSpanList = parentSpan.getChildren();
         Assert.assertTrue(childrenSpanList.size() == 2);

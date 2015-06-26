@@ -18,6 +18,7 @@ public class Span extends Message {
     private long stopTime;
     private String type;
     private String name;
+    private int depth;
     private long durationTime;
     private long selfTime;
     private long childSpanCost;
@@ -121,5 +122,13 @@ public class Span extends Message {
 
     public void setChildSpanCost(long childSpanCost) {
         this.childSpanCost = childSpanCost;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 }
