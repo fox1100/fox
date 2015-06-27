@@ -20,6 +20,8 @@
         <netty-all.version>4.0.27.Final</netty-all.version>
         <kryo.version>3.0.1</kryo.version>
         <servlet-api.version>2.5</servlet-api.version>
+        <leveldb.version>0.7</leveldb.version>
+        <reflections.version>0.9.10</reflections.version>
 
         <junit.version>4.11</junit.version>
     </properties>
@@ -61,8 +63,19 @@
                 <version>${servlet-api.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>org.iq80.leveldb</groupId>
+                <artifactId>leveldb</artifactId>
+                <version>${leveldb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
 
             <dependency>
+
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>

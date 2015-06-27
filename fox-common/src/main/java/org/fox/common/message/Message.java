@@ -16,6 +16,7 @@ public abstract class Message {
     private long sendTime;
     private long receiveTime;
     private long processTime;
+    private String msg;
 
     public long getId() {
         return id;
@@ -63,6 +64,14 @@ public abstract class Message {
 
     public void setProcessTime(long processTime) {
         this.processTime = processTime;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public static ByteBuf toByteBuf(Message message) {

@@ -11,6 +11,8 @@ import org.fox.server.analyzer.os.OSStatsAnalyzer;
 import java.util.List;
 
 /**
+ * Transfer byte array to message
+ *
  * @author jie.huang
  *         Date: 2015/6/24
  *         Time: 15:38

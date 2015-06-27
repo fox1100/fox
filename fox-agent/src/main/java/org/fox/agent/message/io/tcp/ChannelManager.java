@@ -1,4 +1,4 @@
-package org.fox.agent.message.io;
+package org.fox.agent.message.io.tcp;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;

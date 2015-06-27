@@ -6,6 +6,7 @@ package org.fox.agent;
  *         Time: 11:06
  */
 public class AgentInfo {
+    private String applicationId;
     private String applicationName;
     private String startTime;
     private int pid;

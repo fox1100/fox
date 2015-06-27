@@ -59,14 +59,14 @@ public class TcpSocketServer {
             channelFuture = serverBootstrap.bind(port).sync();
             isRunning = true;
             this.port = port;
-            LOGGER.info("Tcp socket server started on " + port);
+            LOGGER.info("Tcp socket server started on {}.", port);
         } catch (Exception e) {
             LOGGER.error("Start tcp socket server error:", e);
         }
     }
 
     public synchronized void shutdown() {
-        LOGGER.info("Start shutdown tcp socket server on " + port);
+        LOGGER.info("Start shutdown tcp socket server on {}.", port);
         channelFuture.channel().closeFuture();
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();

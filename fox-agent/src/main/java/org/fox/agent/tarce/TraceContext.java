@@ -8,7 +8,7 @@ import org.fox.common.message.trace.CallStack;
  *         Time: 13:56
  */
 public class TraceContext {
-    private final static ThreadLocal<CallStack> localCallStack = new ThreadLocal<CallStack>();
+    private final static ThreadLocal<CallStack> localCallStack = new ThreadLocal<>();
 
     protected static CallStack getCallStack() {
        CallStack callStack = localCallStack.get();

@@ -1,6 +1,6 @@
 package org.fox.agent.monitor;
 
-import org.fox.agent.message.io.TcpSocketSender;
+import org.fox.agent.message.io.tcp.TcpSocketSender;
 import org.fox.agent.monitor.os.OSStatsCollector;
 import org.fox.common.message.monitor.os.OSStats;
 import org.fox.common.util.ThreadUtil;
