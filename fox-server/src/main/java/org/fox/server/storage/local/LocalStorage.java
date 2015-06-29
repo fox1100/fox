@@ -9,7 +9,7 @@ import org.fox.server.storage.Storage;
  *         Date: 2015/6/27
  *         Time: 18:05
  */
-public class LocalStorage implements Storage {
+public class LocalStorage implements Storage<byte[], byte[]> {
     @Override
     public void store(byte[] key, byte[] value) {
 

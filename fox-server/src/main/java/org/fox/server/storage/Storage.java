@@ -5,9 +5,9 @@ package org.fox.server.storage;
  *         Date: 2015/6/27
  *         Time: 18:01
  */
-public interface Storage {
+public interface Storage<K, V> {
 
-    void store(byte[] key, byte[] value);
+    void store(K key, V value);
 
-    byte[] get(byte[] key);
+    V get(K key);
 }

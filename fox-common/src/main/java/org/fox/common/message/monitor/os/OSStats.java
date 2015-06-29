@@ -10,6 +10,10 @@ import java.util.List;
  *         Time: 12:53
  */
 public class OSStats extends Message {
+    private int applicationId;
+    private String applicationName;
+    private String hostName;
+    private String hostIp;
     private CpuStats cpuStats;
     private MemoryStats memoryStats;
     private SwapStats swapStats;
@@ -65,7 +69,37 @@ public class OSStats extends Message {
         this.netInterfaceStatsList = netInterfaceStatsList;
     }
 
+    public int getApplicationId() {
+        return applicationId;
+    }
 
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
+    }
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public String getHostIp() {
+        return hostIp;
+    }
+
+    public void setHostIp(String hostIp) {
+        this.hostIp = hostIp;
+    }
 
     @Override
     public String toString() {

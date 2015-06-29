@@ -3,6 +3,7 @@ package org.fox.agent.monitor.os;
 import org.fox.common.message.monitor.os.FileSystemStats;
 import org.fox.common.message.monitor.os.NetInterfaceStats;
 import org.fox.common.message.monitor.os.OSStats;
+import org.fox.common.util.HostUtil;
 import org.hyperic.sigar.FileSystem;
 import org.hyperic.sigar.NetRoute;
 import org.hyperic.sigar.Sigar;
@@ -61,6 +62,11 @@ public class OSStatsCollector {
 
     public OSStats getOSStats() throws Exception {
         OSStats osStats = new OSStats();
+        //TODO set application name
+        osStats.setLogTime(System.currentTimeMillis());
+        osStats.setApplicationName("test");
+        osStats.setHostIp(HostUtil.getHostIp());
+        osStats.setHostName(HostUtil.getHostName());
         osStats.setCpuStats(cpuStatsCollector.getStatsValue());
         osStats.setMemoryStats(memoryStatsCollector.getStatsValue());
         osStats.setNetStats(netStatsCollector.getStatsValue());
