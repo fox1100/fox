@@ -1,21 +1,43 @@
 package org.fox.server.report.os;
 
-import org.fox.common.message.monitor.os.OSStats;
+import com.alibaba.fastjson.JSONObject;
+import org.fox.server.report.Period;
+import org.fox.server.report.PeriodType;
 import org.fox.server.report.Report;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author jie.huang
  *         Date: 2015/6/29
  *         Time: 14:28
  */
-public class OSReport extends Report{
-    private OSStats osStats;
+public class OSReport extends Report {
+    private Map<String,Period> periodMap;
 
-    public OSStats getOsStats() {
-        return osStats;
+    public OSReport() {
+        this.periodMap = new HashMap<>();
     }
 
-    public void setOsStats(OSStats osStats) {
-        this.osStats = osStats;
+    public void inc(String name, int period, long value) {
+        Period periodObj = periodMap.get(name);
+        if (periodObj == null) {
+            periodObj = new Period(name, PeriodType.HOUR);
+            periodMap.put(name, periodObj);
+        }
+        periodObj.inc(period,value);
+    }
+
+
+    @Override
+    public String toString() {
+        JSONObject jsonObject = new JSONObject();
+        for (Period period : periodMap.values()) {
+            jsonObject.put(period.getName(), period.toJSON());
+        }
+        return jsonObject.toString();
     }
 }

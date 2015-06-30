@@ -21,6 +21,7 @@ public class FileSystemStatsCollector extends AbstractSigarStatsCollector<FileSy
     public FileSystemStats getStatsValue() throws Exception {
         FileSystemStats fileSystemStats = new FileSystemStats();
         FileSystemUsage fileSystemUsage = sigar.getFileSystemUsage(fs);
+        fileSystemStats.setName(fs);
         fileSystemStats.setFree(fileSystemUsage.getFree());
         fileSystemStats.setUsed(fileSystemUsage.getUsed());
         fileSystemStats.setUsePercent(fileSystemUsage.getUsePercent());

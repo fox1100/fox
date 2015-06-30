@@ -1,5 +1,6 @@
 package org.fox.server.analyzer.os;
 
+import org.fox.common.counter.Counter;
 import org.fox.common.message.Message;
 import org.fox.common.message.monitor.os.OSStats;
 import org.fox.server.analyzer.Analyzer;
@@ -29,18 +30,16 @@ public class OSStatsAnalyzer implements Analyzer {
     public void process(Message message) {
         if (message instanceof OSStats) {
             OSStats osStats = (OSStats) message;
-            System.out.println(osStats);
-            OSReport report = new OSReport();
-            report.setOsStats(osStats);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(osStats.getLogTime());
-            String dateStr= format.format(date);
+            String dateStr = format.format(date);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            String key  = dateStr+"/"+hour+"/"+osStats.getApplicationName();
-            memStore.store(key, report);
-            System.out.println(message);
+            OSReport report = new OSReport();
+            String key = dateStr + "/" + hour + "/" + osStats.getApplicationName();
+            report = (OSReport) memStore.store(key, report);
+            report.inc("Memory Free",calendar.get(Calendar.MINUTE),osStats.getMemoryStats().getFree());
         }
     }
 }

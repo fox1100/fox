@@ -6,4 +6,5 @@ package org.fox.server.report;
  *         Time: 14:24
  */
 public class Report {
+
 }

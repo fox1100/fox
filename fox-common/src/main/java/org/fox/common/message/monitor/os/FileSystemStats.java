@@ -8,6 +8,7 @@ import org.fox.common.message.Message;
  *         Time: 14:00
  */
 public class FileSystemStats extends Message {
+    private String name;
     private long free;
     private long used;
     private long diskReads;
@@ -16,6 +17,14 @@ public class FileSystemStats extends Message {
     private long diskWriteBytes;
     private double diskQueue;
     private double usePercent;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public long getFree() {
         return free;
@@ -84,7 +93,8 @@ public class FileSystemStats extends Message {
     @Override
     public String toString() {
         return "FileSystemStats{" +
-                "free=" + free +
+                "name='" + name + '\'' +
+                ", free=" + free +
                 ", used=" + used +
                 ", diskReads=" + diskReads +
                 ", diskWrites=" + diskWrites +

@@ -11,8 +11,8 @@ import org.fox.server.storage.Storage;
  */
 public class LocalStorage implements Storage<byte[], byte[]> {
     @Override
-    public void store(byte[] key, byte[] value) {
-
+    public byte[] store(byte[] key, byte[] value) {
+        return null;
     }
 
     @Override

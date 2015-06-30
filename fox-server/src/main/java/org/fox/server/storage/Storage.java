@@ -7,7 +7,7 @@ package org.fox.server.storage;
  */
 public interface Storage<K, V> {
 
-    void store(K key, V value);
+    V store(K key, V value);
 
     V get(K key);
 }

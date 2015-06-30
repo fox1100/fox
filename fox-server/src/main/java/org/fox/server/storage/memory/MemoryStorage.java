@@ -14,8 +14,8 @@ public class MemoryStorage implements Storage<String, Report> {
     private ConcurrentHashMap<String, Report> memStore = new ConcurrentHashMap<>();
 
     @Override
-    public void store(String key, Report value) {
-        memStore.put(key, value);
+    public Report store(String key, Report value) {
+        return memStore.putIfAbsent(key, value);
     }
 
     @Override
